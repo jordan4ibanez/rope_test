@@ -21,7 +21,7 @@ minetest.register_entity("fishing:line", {
     on_step = function(self,dtime)
 		local pos1 = self.object:getpos()
 		local pos2 = minetest.get_player_by_name(self.owner):getpos()
-		pos2.y = pos2.y + 1.5
+		pos2.y = pos2.y + 1.2
 		local vec = {}
 		vec.y = pos2.y - pos1.y
 		vec.x = pos2.x - pos1.x
@@ -53,6 +53,8 @@ minetest.register_entity("fishing:line", {
 		
 		self.object:set_animation({x=pitch,y=pitch}, 0, 0, false)
 		
-			
+		if  minetest.get_player_by_name(self.owner):get_player_control().LMB == true then
+			self.object:setvelocity(vec)
+		end
     end,
 })
